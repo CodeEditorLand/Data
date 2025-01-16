@@ -40,7 +40,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-compat": "^4.2.0",
     "jasmine-core": "^2.4.1",
-    "karma": "^1.2",
+    "karma": "^6.4",
     "karma-chrome-launcher": "^1.0.1",
     "karma-html2js-preprocessor": "^1.0.0",
     "karma-iframes": "^1.2.2",
