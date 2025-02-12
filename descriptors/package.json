@@ -36,7 +36,7 @@
 	},
 	"jspm": {
 		"dependencies": {
-			"css": "^0.1.5",
+			"css": "0.1.5",
 			"jquery": "*"
 		},
 		"registry": "jspm",
