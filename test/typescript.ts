@@ -1,3 +1,4 @@
+import { expectType } from "tsd";
 
 import DataTable, {
 	Api,
@@ -7,13 +8,12 @@ import DataTable, {
 	ApiTableMethods,
 	ConfigColumns,
 	DataType,
+	ExtTypeSettingsDetect,
 	HeaderStructure,
+	InternalSettings,
 	SearchInput,
 	SearchInputColumn,
-	InternalSettings,
-	ExtTypeSettingsDetect
 } from "../types/types";
-import {expectType} from 'tsd';
 
 interface IRow {
 	firstName: string;
@@ -21,43 +21,43 @@ interface IRow {
 	age: number;
 }
 
-let table = new DataTable('#myTable', {
+let table = new DataTable("#myTable", {
 	ajax: {
-		url: '/api/test',
+		url: "/api/test",
 		dataSrc: {
-			data: 'data',
-			draw: 'draw',
-			recordsFiltered: 'filtered',
-			recordsTotal: 'total'
-		}
+			data: "data",
+			draw: "draw",
+			recordsFiltered: "filtered",
+			recordsTotal: "total",
+		},
 	},
-	caption: 'Table caption',
+	caption: "Table caption",
 	columnDefs: [
 		{
-			footer: 'footer text',
+			footer: "footer text",
 			target: 1,
-			orderSequence: ['asc', 'desc', '']
-		}
+			orderSequence: ["asc", "desc", ""],
+		},
 	],
 	language: {
 		entries: {
-			_: 'entries',
-			1: 'entry'
-		}
+			_: "entries",
+			1: "entry",
+		},
 	},
 	layout: {
-		topStart: 'info',
-		top: 'search',
+		topStart: "info",
+		top: "search",
 		top1Start: {
 			info: {},
-			paging: {}
+			paging: {},
 		},
 		top1End: {
 			info: {
-				text: '_START_ to _END_'
-			}
+				text: "_START_ to _END_",
+			},
 		},
-		bottomEnd: [ 'pageLength', 'paging' ],
+		bottomEnd: ["pageLength", "paging"],
 		bottom1End: [
 			{
 				paging: {
@@ -65,97 +65,97 @@ let table = new DataTable('#myTable', {
 					numbers: true,
 					firstLast: true,
 					previousNext: true,
-					boundaryNumbers: false
-				}
-			}
+					boundaryNumbers: false,
+				},
+			},
 		],
 		bottomStart: null,
 		bottom2Start: {
 			paging: {
 				buttons: 4,
-				type: 'numbers',
-				boundaryNumbers: false
-			}
+				type: "numbers",
+				boundaryNumbers: false,
+			},
 		},
 		bottom3Start: {
 			search: {
-				placeholder: 'Search',
+				placeholder: "Search",
 				processing: true,
-				text: 'Search: '
-			}
+				text: "Search: ",
+			},
 		},
 		bottom4: {
-			id: 'testId',
-			className: 'testClass',
-			features: ['search']
+			id: "testId",
+			className: "testClass",
+			features: ["search"],
 		},
 		bottom5: {
-			id: 'testId',
-			className: 'testClass',
-			features: [ 'search', 'paging' ]
+			id: "testId",
+			className: "testClass",
+			features: ["search", "paging"],
 		},
 		bottom6: {
-			rowId: 'testId',
-			rowClass: 'testClass',
+			rowId: "testId",
+			rowClass: "testClass",
 			features: {
-                div: {
-                    text: 'top2 row'
-                }
-            }
+				div: {
+					text: "top2 row",
+				},
+			},
 		},
 		bottom7: {
 			div: {
-				id: 'testId',
-				className: 'testClass'
-			}
-		}
+				id: "testId",
+				className: "testClass",
+			},
+		},
 	},
-	order: [
-		{idx: 1, dir: 'asc'},
-		{name: 'test', dir: 'asc'},
-		[1, 'desc']
-	],
+	order: [{ idx: 1, dir: "asc" }, { name: "test", dir: "asc" }, [1, "desc"]],
 	orderDescReverse: false,
-	deferLoading: [ 1, 10 ],
+	deferLoading: [1, 10],
 });
 
-const tableRowType = new DataTable<IRow>('#example');
+const tableRowType = new DataTable<IRow>("#example");
 
 expectType<Api<any>>(table);
 
 expectType<string>(table.caption());
-expectType<Api<any>>(table.caption('New caption'));
-expectType<Api<any>>(table.caption('Other caption', 'bottom'));
+expectType<Api<any>>(table.caption("New caption"));
+expectType<Api<any>>(table.caption("Other caption", "bottom"));
 
-expectType<Api<any>>(table.error('Error message'));
+expectType<Api<any>>(table.error("Error message"));
 
-expectType<Api<any>>(table.trigger('name', []));
-expectType<Api<any>>(table.trigger('name', [], true));
+expectType<Api<any>>(table.trigger("name", []));
+expectType<Api<any>>(table.trigger("name", [], true));
 
 expectType<boolean>(table.ready());
-expectType<Api<any>>(table.ready(function () {
-	expectType<Api<any>>(this);
-	expectType<Api<any>>(this.draw());
-}));
+expectType<Api<any>>(
+	table.ready(function () {
+		expectType<Api<any>>(this);
+		expectType<Api<any>>(this.draw());
+	}),
+);
 
-expectType<Api<any>>(table.order(
-	{idx: 1, dir: 'asc'},
-	{name: 'test', dir: 'asc'},
-	[1, 'desc']
-));
-expectType<Api<any>>(table.order([
-	{idx: 1, dir: 'asc'},
-	{name: 'test', dir: 'asc'},
-	[1, 'desc']
-]));
-
+expectType<Api<any>>(
+	table.order({ idx: 1, dir: "asc" }, { name: "test", dir: "asc" }, [
+		1,
+		"desc",
+	]),
+);
+expectType<Api<any>>(
+	table.order([
+		{ idx: 1, dir: "asc" },
+		{ name: "test", dir: "asc" },
+		[1, "desc"],
+	]),
+);
 
 /*
  * Cells
  */
-expectType<ApiCellsMethods<any>>(table.cells('th', {order: 'current'}));
-expectType<ApiCellsMethods<any>>(table.cells(1, 0, {order: 'current'}));
-expectType<ApiCellsMethods<any>>(table.cells('*', 0, {order: 'current'}));
+expectType<ApiCellsMethods<any>>(table.cells("th", { order: "current" }));
+expectType<ApiCellsMethods<any>>(table.cells(1, 0, { order: "current" }));
+expectType<ApiCellsMethods<any>>(table.cells("*", 0, { order: "current" }));
 
 /*
  * Columns
@@ -173,12 +173,12 @@ expectType<Api<ConfigColumns>>(table.columns().init());
 
 expectType<string>(table.column(0).title());
 expectType<string>(table.column(0).title(1));
-expectType<Api<any>>(table.column(0).title('title'));
-expectType<Api<any>>(table.column(0).title('title', 1));
+expectType<Api<any>>(table.column(0).title("title"));
+expectType<Api<any>>(table.column(0).title("title", 1));
 expectType<Api<string>>(table.columns().titles());
 expectType<Api<string>>(table.columns().titles(1));
-expectType<Api<any>>(table.columns().titles('title'));
-expectType<Api<any>>(table.columns().titles('title', 1));
+expectType<Api<any>>(table.columns().titles("title"));
+expectType<Api<any>>(table.columns().titles("title", 1));
 
 expectType<HTMLElement>(table.column(0).header());
 expectType<HTMLElement>(table.column(0).header(1));
@@ -191,43 +191,51 @@ expectType<Api<boolean>>(table.columns().orderable());
 expectType<Api<any>>(table.columns().orderable(true));
 
 expectType<Api<any>>(table.column(0).render());
-expectType<Api<any>>(table.column(0).render('display'));
+expectType<Api<any>>(table.column(0).render("display"));
 expectType<Api<any>>(table.columns().render());
-expectType<Api<any>>(table.columns().render('display'));
+expectType<Api<any>>(table.columns().render("display"));
 
-expectType<Api<any>>(table.column(0).search(''));
-expectType<Api<any>>(table.column(0).search('test', {
-	boundary: true,
-	regex: false,
-	smart: true,
-	caseInsensitive: true,
-	exact: false
-}));
+expectType<Api<any>>(table.column(0).search(""));
+expectType<Api<any>>(
+	table.column(0).search("test", {
+		boundary: true,
+		regex: false,
+		smart: true,
+		caseInsensitive: true,
+		exact: false,
+	}),
+);
 expectType<Api<any>>(table.column(0).search(/regex/));
 expectType<Api<any>>(table.column(0).search((d) => true));
-expectType<Api<any>>(table.columns().search(''));
-expectType<Api<any>>(table.columns().search('test', {
-	boundary: true,
-	regex: false,
-	smart: true,
-	caseInsensitive: true,
-	exact: false
-}));
+expectType<Api<any>>(table.columns().search(""));
+expectType<Api<any>>(
+	table.columns().search("test", {
+		boundary: true,
+		regex: false,
+		smart: true,
+		caseInsensitive: true,
+		exact: false,
+	}),
+);
 expectType<Api<any>>(table.columns().search(/regex/));
 expectType<Api<any>>(table.columns().search((d) => true));
 
 expectType<Api<string>>(table.column(0).search.fixed());
-expectType<SearchInputColumn<any> | undefined>(table.column(0).search.fixed('test'));
-expectType<Api<any>>(table.column(0).search.fixed('test', null));
-expectType<Api<any>>(table.column(0).search.fixed('test', 'search'));
-expectType<Api<any>>(table.column(0).search.fixed('test', /regex/));
-expectType<Api<any>>(table.column(0).search.fixed('test', (d) => true));
+expectType<SearchInputColumn<any> | undefined>(
+	table.column(0).search.fixed("test"),
+);
+expectType<Api<any>>(table.column(0).search.fixed("test", null));
+expectType<Api<any>>(table.column(0).search.fixed("test", "search"));
+expectType<Api<any>>(table.column(0).search.fixed("test", /regex/));
+expectType<Api<any>>(table.column(0).search.fixed("test", (d) => true));
 expectType<Api<Array<string>>>(table.columns().search.fixed());
-expectType<Api<SearchInputColumn<any> | undefined>>(table.columns().search.fixed('test'));
-expectType<Api<any>>(table.columns().search.fixed('test', null));
-expectType<Api<any>>(table.columns().search.fixed('test', 'search'));
-expectType<Api<any>>(table.columns().search.fixed('test', /regex/));
-expectType<Api<any>>(table.columns().search.fixed('test', (d) => true));
+expectType<Api<SearchInputColumn<any> | undefined>>(
+	table.columns().search.fixed("test"),
+);
+expectType<Api<any>>(table.columns().search.fixed("test", null));
+expectType<Api<any>>(table.columns().search.fixed("test", "search"));
+expectType<Api<any>>(table.columns().search.fixed("test", /regex/));
+expectType<Api<any>>(table.columns().search.fixed("test", (d) => true));
 
 expectType<string>(table.column(0).type());
 expectType<Api<string>>(table.columns().types());
@@ -250,43 +258,42 @@ expectType<HTMLTableSectionElement>(table.table().header());
 expectType<HTMLTableSectionElement>(table.table().body());
 expectType<HTMLTableSectionElement>(table.table().footer());
 
-
 /* Search */
 expectType<Api<string>>(table.search.fixed());
-expectType<SearchInput<any> | undefined>(table.search.fixed('test'));
-expectType<Api<any>>(table.search.fixed('test', null));
-expectType<Api<any>>(table.search.fixed('test', 'search'));
-expectType<Api<any>>(table.search.fixed('test', /regex/));
-expectType<Api<any>>(table.search.fixed('test', (d) => true));
+expectType<SearchInput<any> | undefined>(table.search.fixed("test"));
+expectType<Api<any>>(table.search.fixed("test", null));
+expectType<Api<any>>(table.search.fixed("test", "search"));
+expectType<Api<any>>(table.search.fixed("test", /regex/));
+expectType<Api<any>>(table.search.fixed("test", (d) => true));
 
 /*
  * Event listeners
  */
-expectType<Api<any>>(table.off('draw'));
-expectType<Api<any>>(table.off('draw', function () {}));
-expectType<Api<any>>(table.off('click', 'tbody td'));
-expectType<Api<any>>(table.off('click', 'tbody td', function () {}));
-expectType<Api<any>>(table.on('draw', function () {}));
-expectType<Api<any>>(table.on('click', 'tbody td', function () {}));
-expectType<Api<any>>(table.one('draw', function () {}));
-expectType<Api<any>>(table.one('click', 'tbody td', function () {}));
+expectType<Api<any>>(table.off("draw"));
+expectType<Api<any>>(table.off("draw", function () {}));
+expectType<Api<any>>(table.off("click", "tbody td"));
+expectType<Api<any>>(table.off("click", "tbody td", function () {}));
+expectType<Api<any>>(table.on("draw", function () {}));
+expectType<Api<any>>(table.on("click", "tbody td", function () {}));
+expectType<Api<any>>(table.one("draw", function () {}));
+expectType<Api<any>>(table.one("click", "tbody td", function () {}));
 
 // Check `this` is an HTMLElement
-table.on('draw', function () {
-	this.getElementsByTagName('test');
+table.on("draw", function () {
+	this.getElementsByTagName("test");
 });
 
-table.on('click', 'tbody td', function () {
-	this.getElementsByTagName('test');
+table.on("click", "tbody td", function () {
+	this.getElementsByTagName("test");
 });
 
 /*
  * Rows
  */
-expectType<Node>(table.row.add(['a', 'b', 'c']).node());
+expectType<Node>(table.row.add(["a", "b", "c"]).node());
 
-expectType<Api<any>>(table.rows({order: 1}).data());
-expectType<Api<Node[]>>(table.rows.add([['a', 'b', 'c']]).nodes());
+expectType<Api<any>>(table.rows({ order: 1 }).data());
+expectType<Api<Node[]>>(table.rows.add([["a", "b", "c"]]).nodes());
 
 tableRowType.rows().every(function () {
 	expectType<ApiRowMethods<any>>(this);
@@ -296,65 +303,61 @@ tableRowType.rows().every(function () {
 
 expectType<HTMLTableRowElement>(table.row(1).node());
 
-
-
 /*
  * Static
  */
-DataTable.feature.register('myFeature', function (dt, opts) {
-	return document.createElement('div');
+DataTable.feature.register("myFeature", function (dt, opts) {
+	return document.createElement("div");
 });
 
 expectType<string[]>(DataTable.types());
-expectType<DataType>(DataTable.type('num'));
-expectType<string | undefined>(DataTable.type('num').className);
-expectType<(ExtTypeSettingsDetect | undefined)>(DataTable.type('num').detect);
-DataTable.type('num', 'className', 'test');
-DataTable.type('num', 'detect', (d: any) => 'test');
-DataTable.type('num', 'detect', {
-	oneOf: d => true,
-	allOf: d => true
+expectType<DataType>(DataTable.type("num"));
+expectType<string | undefined>(DataTable.type("num").className);
+expectType<ExtTypeSettingsDetect | undefined>(DataTable.type("num").detect);
+DataTable.type("num", "className", "test");
+DataTable.type("num", "detect", (d: any) => "test");
+DataTable.type("num", "detect", {
+	oneOf: (d) => true,
+	allOf: (d) => true,
 });
-DataTable.type('num', 'order', {
-	pre: d => d,
-	asc: (a, b) => a-b,
-	desc: (a, b) => a+b,
+DataTable.type("num", "order", {
+	pre: (d) => d,
+	asc: (a, b) => a - b,
+	desc: (a, b) => a + b,
 });
-DataTable.type('num', {
-	className: 'test'
+DataTable.type("num", {
+	className: "test",
 });
-DataTable.type('num', {
-	className: 'test',
+DataTable.type("num", {
+	className: "test",
 	detect: (d) => true,
 	order: {
-		pre: d => d,
-		asc: (a, b) => a-b,
-		desc: (a, b) => a+b,
+		pre: (d) => d,
+		asc: (a, b) => a - b,
+		desc: (a, b) => a + b,
 	},
-	render: d => d,
-	search: d => d
+	render: (d) => d,
+	search: (d) => d,
 });
 
-expectType<void>(DataTable.use('win', window));
+expectType<void>(DataTable.use("win", window));
 
-expectType<number[]>(DataTable.util.unique([1,2,3,4]));
+expectType<number[]>(DataTable.util.unique([1, 2, 3, 4]));
 
-expectType<string>(DataTable.util.stripHtml('some html'));
+expectType<string>(DataTable.util.stripHtml("some html"));
 expectType<void>(DataTable.util.stripHtml((s) => s));
 
-expectType<string>(DataTable.util.escapeHtml('some text'));
+expectType<string>(DataTable.util.escapeHtml("some text"));
 expectType<void>(DataTable.util.escapeHtml((s) => s));
 
-expectType<string>(DataTable.util.diacritics('accented text'));
-expectType<string>(DataTable.util.diacritics('accented text', true));
+expectType<string>(DataTable.util.diacritics("accented text"));
+expectType<string>(DataTable.util.diacritics("accented text", true));
 expectType<void>(DataTable.util.diacritics((s, r) => s));
 
+expectType<any>(DataTable.util.get("hello"));
+expectType<any>(DataTable.util.set("hello"));
 
-expectType<any>(DataTable.util.get('hello'));
-expectType<any>(DataTable.util.set('hello'));
-
-
-var res = DataTable.Api.register('apiMethod()', function (from, to) {
+var res = DataTable.Api.register("apiMethod()", function (from, to) {
 	expectType<Api<any>>(this);
 	expectType<Api<any>>(this.draw());
 	expectType<Api<any>>(this.draw(false));
