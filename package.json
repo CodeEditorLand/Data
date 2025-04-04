@@ -41,7 +41,7 @@
 		"@rollup/plugin-node-resolve": "16.0.1",
 		"datatables.net": "2.2.2",
 		"rollup": "4.39.0",
-		"sass": "1.86.2",
+		"sass": "1.86.3",
 		"uglify-js": "3.19.3"
 	},
 	"devDependencies": {
