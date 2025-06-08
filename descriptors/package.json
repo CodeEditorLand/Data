@@ -32,7 +32,7 @@
 		"media/images"
 	],
 	"dependencies": {
-		"jquery": ">=3.7"
+		"jquery": "^3.7.1"
 	},
 	"jspm": {
 		"dependencies": {
